@@ -69,13 +69,13 @@ public class PopulateEnrolledUsersCourse {
 		EnrolledUser enrolledUser = userAttributes(user);
 
 		List<Course> courses = createCourses(user.optJSONArray(Constants.ENROLLEDCOURSES));
-		courses.forEach(course -> course.getUsers().add(enrolledUser));
+		courses.forEach(course -> enrolledUser.getCourses().add(course));
 
 		List<Role> roles = createRoles(user.optJSONArray(Constants.ROLES));
-		roles.forEach(role -> role.getEnrolledUsers().add(enrolledUser));
+		roles.forEach(role -> enrolledUser.getRoles().add(role));
 		
 		List<Group> groups = createGroups(user.optJSONArray(Constants.GROUPS));
-		groups.forEach(group -> group.getEnrolledUsers().add(enrolledUser));
+		groups.forEach(group -> enrolledUser.getGroups().add(group));
 		
 		return enrolledUser;
 

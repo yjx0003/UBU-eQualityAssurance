@@ -2,6 +2,8 @@ package es.ubu.lsi.equalityassurance.model;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -151,8 +153,18 @@ public class EnrolledUser implements Serializable {
 	 * Optional. User image profile URL - big version
 	 */
 	private String profileimageurl;
+	
+	private List<Role> roles;
+	
+	private List<Group> groups;
+	
+	private List<Course> courses;
 
 	public EnrolledUser(int id) {
 		this.id = id;
+		this.roles = new ArrayList<>();
+		this.groups = new ArrayList<>();
+		this.courses = new ArrayList<>();
+		
 	}
 }

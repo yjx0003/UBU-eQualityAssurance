@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/tabulator.css" />
+    <script type="text/javascript" src="./lib/tabulator.js"></script>
+    <script type="text/javascript">
+
+        var table;
+
+        function updateTabulator(data, options) {
+
+            options.columns = data.columns;
+            options.data = data.tabledata;
+            if(table){
+                table.destroy();
+            }
+          
+            table = new Tabulator("#tabulatorDiv", options);
+
+
+
+
+        }
+    </script>
+</head>
+
+<body>
+
+
+    <div id="tabulatorDiv"></div>
+</body>
+
+</html>

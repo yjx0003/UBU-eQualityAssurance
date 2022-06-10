@@ -23,11 +23,28 @@ public class SelectionCourseController {
 	private TextField textFieldSearch;
 
 	public void init(MainController mainController, List<Course> courses) {
-		FilteredList<Course> filteredList = new FilteredList<Course>(FXCollections.observableArrayList(courses));
+		FilteredList<Course> filteredList = listViewCourses(courses);
+		onSelectionItem(mainController);
+		textFieldSearch(filteredList);
+
+		setCellFactory();
+	}
+	
+	public Course getSelectedCourse() {
+		return listViewCourses.getSelectionModel().getSelectedItem();
+	}
+
+	private FilteredList<Course> listViewCourses(List<Course> courses) {
+
+		
+
+		FilteredList<Course> filteredList = new FilteredList<>(FXCollections.observableArrayList(courses));
 		filteredList.sorted(Comparator.comparing(Course::getFullName));
-
 		listViewCourses.setItems(filteredList);
+		return filteredList;
+	}
 
+	private void onSelectionItem(MainController mainController) {
 		listViewCourses.getSelectionModel()
 				.selectedItemProperty()
 				.addListener((ov, old, newValue) -> {
@@ -41,7 +58,9 @@ public class SelectionCourseController {
 								.updateListView(courseDir);
 					}
 				});
+	}
 
+	private void textFieldSearch(FilteredList<Course> filteredList) {
 		textFieldSearch.textProperty()
 				.addListener(((observable, oldValue, newValue) -> {
 					filteredList.setPredicate(course -> {
@@ -53,32 +72,33 @@ public class SelectionCourseController {
 								.contains(lowerCaseSearch);
 					});
 				}));
-		
-		listViewCourses.setCellFactory(param -> new ListCell<Course>(){
-            @Override
-            protected void updateItem(Course item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item==null) {
-                    setGraphic(null);
-                    setText(null); 
-                    // other stuff to do...
+	}
 
-                }else{
+	private void setCellFactory() {
+		listViewCourses.setCellFactory(param -> new ListCell<Course>() {
+			@Override
+			protected void updateItem(Course item, boolean empty) {
+				super.updateItem(item, empty);
+				if (empty || item == null) {
+					setGraphic(null);
+					setText(null);
+					// other stuff to do...
 
-                    // set the width's
-                    setMinWidth(param.getWidth());
-                    setMaxWidth(param.getWidth());
-                    setPrefWidth(param.getWidth());
+				} else {
 
-                    // allow wrapping
-                    setWrapText(true);
+					// set the width's
+					setMinWidth(param.getWidth());
+					setMaxWidth(param.getWidth());
+					setPrefWidth(param.getWidth());
 
-                    setText(item.toString());
+					// allow wrapping
+					setWrapText(true);
 
+					setText(item.toString());
 
-                }
-            }
-        });
+				}
+			}
+		});
 	}
 
 }

@@ -1,8 +1,6 @@
 package es.ubu.lsi.equalityassurance.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,15 +15,9 @@ public class Role implements Serializable {
 	private int roleId;
 	private String roleName;
 	private String roleShortName;
-	private Set<EnrolledUser> enrolledUsers;
-	
-	public Role() {
-		this.enrolledUsers=new HashSet<>();
-	}
-	
+
 
 	public Role(int id) {
-		this();
 		setRoleId(id);
 	}
 

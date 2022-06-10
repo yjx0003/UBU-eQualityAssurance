@@ -22,6 +22,8 @@ public class MainController implements Initializable{
 	@FXML
 	private UpperElementsController upperElementsController;
 	
+	@FXML
+	private WebViewContentController webViewContentController;
 	
 	
 
@@ -29,7 +31,9 @@ public class MainController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		List<Course> courses = Controller.getInstance().getDataBase().getSiteInfo().getCoursesEnrolled();
 		selectionCourseController.init(this, courses);
-		
+		upperElementsController.init(this);
+		selectionCacheController.init(this);
+		webViewContentController.init();
 	}
 	
 }

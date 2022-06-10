@@ -32,7 +32,6 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.ComboBox;
@@ -49,8 +48,6 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Clase controlador de la ventana de Login
  * 
- * @author Claudia Martínez Herrero
- * @version 1.0
  *
  */
 @Slf4j

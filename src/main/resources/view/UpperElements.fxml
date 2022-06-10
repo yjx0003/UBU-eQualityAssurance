@@ -17,12 +17,12 @@
             <Menu mnemonicParsing="false" text="%menu.file" />
             <Menu mnemonicParsing="false" text="%menu.edit">
                <items>
-                  <MenuItem mnemonicParsing="false" text="menu.delete" />
+                  <MenuItem mnemonicParsing="false" text="%menu.delete" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="%menu.help">
                <items>
-                  <MenuItem mnemonicParsing="false" text="menu.about" />
+                  <MenuItem mnemonicParsing="false" text="%menu.about" />
                </items>
             </Menu>
          </menus>

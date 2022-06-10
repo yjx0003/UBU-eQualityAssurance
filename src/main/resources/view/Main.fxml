@@ -17,7 +17,7 @@
 						<fx:include fx:id="selectionCache" source="SelectionCache.fxml" />
 					</items>
 				</SplitPane>
-				<WebView minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" />
+				<fx:include fx:id="webViewContent" source="WebViewContent.fxml" />
 			</items>
 		</SplitPane>
 	</center>

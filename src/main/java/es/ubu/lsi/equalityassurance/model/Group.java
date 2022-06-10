@@ -1,8 +1,6 @@
 package es.ubu.lsi.equalityassurance.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,15 +24,9 @@ public class Group implements Serializable {
 	private String groupName;
 	private String description;
 	private DescriptionFormat descriptionFormat;
-
-	private Set<EnrolledUser> enrolledUsers;
-
-	public Group() {
-		this.enrolledUsers = new HashSet<>();
-	}
+	
 
 	public Group(int id) {
-		this();
 		setGroupId(id);
 	}
 

@@ -1,6 +1,7 @@
 package es.ubu.lsi.equalityassurance.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +36,10 @@ public class SubDataBase<E extends Serializable> implements Serializable {
 
 	public void clear() {
 		map.clear();
+	}
+	
+	public Collection<E> getValues() {
+		return map.values();
 	}
 	
 	@Override

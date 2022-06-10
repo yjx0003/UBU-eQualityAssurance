@@ -6,6 +6,11 @@ import java.util.Map;
 public enum WSFunctionEnum {
 
 	/**
+	 * Returns blocks information for a course.
+	 */
+	CORE_BLOCK_GET_COURSE_BLOCS("core_block_get_course_blocks", 3.3),
+	
+	/**
 	 * Fetch the day view data for a calendar
 	 */
 	CORE_CALENDAR_GET_CALENDAR_DAY_VIEW("core_calendar_get_calendar_day_view", 3.4),

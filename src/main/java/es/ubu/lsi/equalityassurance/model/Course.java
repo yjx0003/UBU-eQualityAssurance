@@ -2,8 +2,6 @@ package es.ubu.lsi.equalityassurance.model;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -33,12 +31,9 @@ public class Course implements Serializable {
 	private boolean gradeItemAccess;
 	private boolean hasActivityCompletion;
 	
-	private Set<EnrolledUser> users;
 	
 	public Course(int id) {
-		
 		this.id = id;
-		this.users = new HashSet<>();
 	}
 
 	@Override

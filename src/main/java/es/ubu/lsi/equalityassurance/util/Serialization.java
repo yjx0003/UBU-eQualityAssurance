@@ -93,9 +93,9 @@ public class Serialization {
 	 */
 	public static void encrypt(String key, String ruta, Object object) {
 		LOGGER.info("Intendado encriptar fichero: {}", ruta);
-
+		
 		Cipher cipher = initCipher(key, Cipher.ENCRYPT_MODE);	
-
+		
 		try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(ruta))) {
 			SealedObject sealedObject = new SealedObject((Serializable)object, cipher);
 			outputStream.writeObject(sealedObject);
