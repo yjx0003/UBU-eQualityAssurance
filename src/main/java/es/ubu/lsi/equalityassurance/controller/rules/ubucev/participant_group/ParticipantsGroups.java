@@ -1,4 +1,4 @@
-package es.ubu.lsi.equalityassurance.controller.rules.participant_group;
+package es.ubu.lsi.equalityassurance.controller.rules.ubucev.participant_group;
 
 import java.util.Arrays;
 

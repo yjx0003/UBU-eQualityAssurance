@@ -2,7 +2,6 @@ package es.ubu.lsi.equalityassurance.view;
 
 import java.util.List;
 
-import es.ubu.lsi.equalityassurance.controller.rules.AllRules;
 import es.ubu.lsi.equalityassurance.controller.rules.Rule;
 import es.ubu.lsi.equalityassurance.model.DataBase;
 import es.ubu.lsi.equalityassurance.util.I18n;
@@ -18,13 +17,17 @@ public class Table {
 		this.dataBase = dataBase;
 	}
 
-	public void updateTable(WebEngine webEngine) {
-		Rule allRules = new AllRules();
-		JSArray tabledata = new JSArray();
-		leafRules(tabledata, allRules);
+	public void updateTable(WebEngine webEngine, Rule rootRule) {
 		JSObject data = new JSObject();
+		if(dataBase == null) {
+			JSArray tabledata = new JSArray();
+			data.put("tabledata", tabledata);
+		} else {
+			JSArray tabledata = new JSArray();
+			leafRules(tabledata, rootRule);
+			data.put("tabledata", tabledata);
+		}
 		data.put("columns", createColumns());
-		data.put("tabledata", tabledata);
 		webEngine.executeScript(String.format("updateTabulator(%s, %s)", data, getOptions()));
 
 	}
@@ -58,7 +61,8 @@ public class Table {
 		jsObject.put("min", 0);
 		jsObject.put("max", 1);
 
-		jsObject.put("legend", "function(value){return Math.round(value*100||0)+'%';}");
+		jsObject.put("legend", "function(value){return Math.round( value * 10000 + Number.EPSILON ) / 100" + 
+				"+' %';}");
 
 		jsObject.putWithQuote("hozAlign", "center");
 		JSArray jsArray = new JSArray();
@@ -76,7 +80,7 @@ public class Table {
 		jsObject.put("height", "'95%'");
 		jsObject.put("dataTree", true);
 		jsObject.put("dataTreeStartExpanded", true);
-		
+		jsObject.put("layout", "'fitDataStretch'");
 		return jsObject;
 
 	}

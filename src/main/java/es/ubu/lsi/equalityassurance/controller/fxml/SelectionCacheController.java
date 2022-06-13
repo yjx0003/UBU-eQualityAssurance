@@ -12,7 +12,6 @@ import es.ubu.lsi.equalityassurance.model.DataBase;
 import es.ubu.lsi.equalityassurance.util.I18n;
 import es.ubu.lsi.equalityassurance.util.Serialization;
 import es.ubu.lsi.equalityassurance.util.UtilAlert;
-import es.ubu.lsi.equalityassurance.view.Table;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -32,8 +31,9 @@ public class SelectionCacheController {
 
 	private File courseDir;
 
+	private DataBase dataBase;
 	private MainController mainController;
-	
+
 	public void init(MainController mainController) {
 		this.mainController = mainController;
 		setCellFactory();
@@ -98,21 +98,23 @@ public class SelectionCacheController {
 				.selectedItemProperty()
 				.addListener((ov, old, newValue) -> {
 					if (newValue == null) {
-						return;
+						dataBase = null;
+					} else {
+						try {
+							DataBase dataBase = (DataBase) Serialization.decrypt(Controller.getInstance()
+									.getPassword(), newValue.toString());
+							this.dataBase = dataBase;
+
+						} catch (Exception e) {
+							UtilAlert.errorWindow("Error al deserializar", e);
+							return;
+						}
 					}
-					try {
-						DataBase dataBase = (DataBase) Serialization.decrypt(Controller.getInstance()
-								.getPassword(), newValue.toString());
-						Table table = new Table(dataBase);
-						table.updateTable(mainController.getWebViewContentController().getWebView().getEngine());
-					} catch (Exception e) {
-						UtilAlert.errorWindow("Error al deserializar", e);
-						return;
-					}
+					mainController.getWebViewContentController()
+							.update(dataBase);
 
 				});
 
 	}
 
-	
 }

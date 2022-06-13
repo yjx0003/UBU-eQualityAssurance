@@ -1,5 +1,6 @@
-package es.ubu.lsi.equalityassurance.controller.rules.participant_group;
+package es.ubu.lsi.equalityassurance.controller.rules.ubucev.participant_group;
 
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import es.ubu.lsi.equalityassurance.controller.rules.BasicRule;
@@ -25,6 +26,7 @@ public class StudentGroupRule extends BasicRule {
 				.filter(u -> u.getGroups()
 						.isEmpty())
 				.map(EnrolledUser::getFullName)
+				.filter(Objects::nonNull)
 				.collect(Collectors.joining(" || "));
 		
 		return super.reasonFail(dataBase) + usernames;

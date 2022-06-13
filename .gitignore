@@ -26,3 +26,4 @@ hs_err_pid*
 /.apt_generated_tests/
 /cache/
 /log/
+/configuration.json

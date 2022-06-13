@@ -1,4 +1,4 @@
-package es.ubu.lsi.equalityassurance.controller.rules.block;
+package es.ubu.lsi.equalityassurance.controller.rules.ubucev.block;
 
 import java.util.Arrays;
 

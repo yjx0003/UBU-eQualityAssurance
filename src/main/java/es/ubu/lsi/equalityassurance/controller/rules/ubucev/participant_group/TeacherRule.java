@@ -1,4 +1,4 @@
-package es.ubu.lsi.equalityassurance.controller.rules.participant_group;
+package es.ubu.lsi.equalityassurance.controller.rules.ubucev.participant_group;
 
 import es.ubu.lsi.equalityassurance.controller.rules.BasicRule;
 import es.ubu.lsi.equalityassurance.model.DataBase;

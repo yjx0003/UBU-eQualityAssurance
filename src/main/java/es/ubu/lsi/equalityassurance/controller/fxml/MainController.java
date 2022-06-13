@@ -33,7 +33,7 @@ public class MainController implements Initializable{
 		selectionCourseController.init(this, courses);
 		upperElementsController.init(this);
 		selectionCacheController.init(this);
-		webViewContentController.init();
+		webViewContentController.init(this);
 	}
 	
 }

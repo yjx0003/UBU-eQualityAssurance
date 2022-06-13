@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.web.WebView?>
 
 
-<WebView fx:id="webView" minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ubu.lsi.equalityassurance.controller.fxml.WebViewContentController" />
+<TabPane fx:id="tabPaneWebViews" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ubu.lsi.equalityassurance.controller.fxml.WebViewContentController">
+   <tabs>
+      <Tab fx:id="tabUbucev" closable="false" text="%tab.ubucev">
+         <content>
+            <WebView minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" />
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>
