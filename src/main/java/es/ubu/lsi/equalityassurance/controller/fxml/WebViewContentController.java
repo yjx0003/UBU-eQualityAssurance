@@ -9,12 +9,14 @@ import es.ubu.lsi.equalityassurance.controller.rules.Rule;
 import es.ubu.lsi.equalityassurance.controller.rules.ubucev.RootUbucevRule;
 import es.ubu.lsi.equalityassurance.model.DataBase;
 import es.ubu.lsi.equalityassurance.view.Table;
+import javafx.concurrent.Worker;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import lombok.Getter;
+import netscape.javascript.JSObject;
 
 @Getter
 public class WebViewContentController {
@@ -25,6 +27,7 @@ public class WebViewContentController {
 	@FXML
 	private Tab tabUbucev;
 	
+	private JavaConnector javaConnector;
 	private Map<Tab, Rule> rootRules = new HashMap<>();
 	
 	private MainController mainController;
@@ -37,7 +40,8 @@ public class WebViewContentController {
 			initWebView((WebView)tab.getContent());
 		}
 		tabPaneWebViews.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) ->{
-			
+			DataBase dataBase = mainController.getSelectionCacheController().getDataBase();
+			update(dataBase);
 		});
 		
 		
@@ -48,7 +52,18 @@ public class WebViewContentController {
 	}
 	
 	private void initWebView(WebView webView) {
+		javaConnector = new JavaConnector();
 		WebEngine webEngine = webView.getEngine();
+		
+		webEngine.getLoadWorker()
+		.stateProperty()
+		.addListener((ov, oldState, newState) -> {
+			if (Worker.State.SUCCEEDED != newState)
+				return;
+			JSObject window = (JSObject) webEngine.executeScript("window");
+			window.setMember("javaConnector", javaConnector);
+
+		});
 		webEngine.load(getClass().getResource("/graphics/Charts.html")
 				.toExternalForm());
 	}

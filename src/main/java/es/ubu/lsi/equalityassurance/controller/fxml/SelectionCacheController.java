@@ -101,9 +101,9 @@ public class SelectionCacheController {
 						dataBase = null;
 					} else {
 						try {
-							DataBase dataBase = (DataBase) Serialization.decrypt(Controller.getInstance()
+							DataBase dataBaseSelected = (DataBase) Serialization.decrypt(Controller.getInstance()
 									.getPassword(), newValue.toString());
-							this.dataBase = dataBase;
+							this.dataBase = dataBaseSelected;
 
 						} catch (Exception e) {
 							UtilAlert.errorWindow("Error al deserializar", e);

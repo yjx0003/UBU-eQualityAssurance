@@ -19,7 +19,7 @@ public class Table {
 
 	public void updateTable(WebEngine webEngine, Rule rootRule) {
 		JSObject data = new JSObject();
-		if(dataBase == null) {
+		if (dataBase == null) {
 			JSArray tabledata = new JSArray();
 			data.put("tabledata", tabledata);
 		} else {
@@ -37,7 +37,6 @@ public class Table {
 		JSArray array = new JSArray();
 
 		jsObject.putWithQuote("title", I18n.get("chartlabel.name"));
-		jsObject.put("tooltip", true);
 		jsObject.put("field", "'name'");
 		array.add(jsObject);
 
@@ -47,10 +46,9 @@ public class Table {
 		jsObject.putWithQuote("formatter", "progress");
 		jsObject.put("formatterParams", getProgressParam());
 		array.add(jsObject.toString());
-		
+
 		jsObject = new JSObject();
 		jsObject.putWithQuote("title", I18n.get("chartlabel.reasonFail"));
-		jsObject.put("tooltip", true);
 		jsObject.put("field", "'reasonFail'");
 		array.add(jsObject);
 		return array;
@@ -61,8 +59,7 @@ public class Table {
 		jsObject.put("min", 0);
 		jsObject.put("max", 1);
 
-		jsObject.put("legend", "function(value){return Math.round( value * 10000 + Number.EPSILON ) / 100" + 
-				"+' %';}");
+		jsObject.put("legend", "function(value){return Math.round( value * 10000 + Number.EPSILON ) / 100" + "+' %';}");
 
 		jsObject.putWithQuote("hozAlign", "center");
 		JSArray jsArray = new JSArray();
@@ -77,9 +74,10 @@ public class Table {
 
 	private JSObject getOptions() {
 		JSObject jsObject = new JSObject();
-		jsObject.put("height", "'95%'");
+		jsObject.put("height", "'100%'");
 		jsObject.put("dataTree", true);
 		jsObject.put("dataTreeStartExpanded", true);
+		jsObject.put("rowClickPopup", "rowPopupFormatter");
 		jsObject.put("layout", "'fitDataStretch'");
 		return jsObject;
 
@@ -92,7 +90,7 @@ public class Table {
 		List<Rule> leafRules = rule.getChildrenRules();
 
 		jsObject.put("value", rule.getValue(dataBase));
-		
+
 		if (!leafRules.isEmpty()) {
 
 			JSArray children = new JSArray();
@@ -101,8 +99,18 @@ public class Table {
 
 				leafRules(children, leafRule);
 			}
-		} else if(!rule.apply(dataBase)) {
-			jsObject.putWithQuote("reasonFail", rule.reasonFail(dataBase));
+		} else if (!rule.apply(dataBase)) {
+
+			List<Object> reasonFailPopups = rule.reasonFailPopup(dataBase);
+			if (!reasonFailPopups.isEmpty()) {
+				JSArray array = new JSArray();
+				array.addAllWithQuote(reasonFailPopups);
+				jsObject.putWithQuote("reasonFail", "+ " + rule.reasonFail(dataBase));
+				jsObject.put("reasonFailPopup", array);
+
+			} else {
+				jsObject.putWithQuote("reasonFail", rule.reasonFail(dataBase));
+			}
 		}
 	}
 }

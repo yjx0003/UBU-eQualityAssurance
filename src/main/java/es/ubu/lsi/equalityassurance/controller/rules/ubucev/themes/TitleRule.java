@@ -1,34 +1,31 @@
-package es.ubu.lsi.equalityassurance.controller.rules.ubucev.participant_group;
+package es.ubu.lsi.equalityassurance.controller.rules.ubucev.themes;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import es.ubu.lsi.equalityassurance.controller.rules.BasicRule;
 import es.ubu.lsi.equalityassurance.model.DataBase;
-import es.ubu.lsi.equalityassurance.model.EnrolledUser;
+import es.ubu.lsi.equalityassurance.model.Section;
 
-public class StudentGroupRule extends BasicRule {
+public class TitleRule extends BasicRule {
 
 	@Override
 	public boolean apply(DataBase dataBase) {
-		return dataBase.getUsers()
+		return dataBase.getSections()
 				.getValues()
 				.stream()
-				.noneMatch(u -> u.getGroups()
+				.noneMatch(s -> s.getName() != null && s.getName()
 						.isEmpty());
 	}
 
 	@Override
 	public List<Object> reasonFailPopup(DataBase dataBase) {
-		return dataBase.getUsers()
+		return dataBase.getSections()
 				.getValues()
 				.stream()
-				.filter(u -> u.getGroups()
+				.filter(s -> s.getName() != null && s.getName()
 						.isEmpty())
-				.map(EnrolledUser::getFullName)
-				.filter(Objects::nonNull)
-				.sorted()
+				.map(Section::getSectionNumber)
 				.collect(Collectors.toList());
 	}
 

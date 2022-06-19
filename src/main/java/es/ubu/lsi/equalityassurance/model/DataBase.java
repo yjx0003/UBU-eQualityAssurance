@@ -33,16 +33,12 @@ public class DataBase implements Serializable {
 	private SubDataBase<GradeItem> gradeItems;
 	private SubDataBase<CourseCategory> courseCategories;
 	private SubDataBase<Section> sections;
+	private SubDataBase<Forum> forums; 
 	private SubDataBase<ForumDiscussion> forumDiscussions;
 	private SubDataBase<DiscussionPost> discussionPosts;
 	private SubDataBase<CourseEvent> courseEvents;
 	private SubDataBase<Block> blocks;
 
-	
-	
-	/**
-	 * Curso actual del usuario
-	 */
 	private Course actualCourse;
 
 	public DataBase() {
@@ -60,7 +56,7 @@ public class DataBase implements Serializable {
 		courseCategories = checkSubDataBase(courseCategories, CourseCategory::new);
 		sections = checkSubDataBase(sections, Section::new);
 		
-		
+		forums = checkSubDataBase(forums, Forum::new);
 		forumDiscussions = checkSubDataBase(forumDiscussions, ForumDiscussion::new);
 		discussionPosts = checkSubDataBase(discussionPosts, DiscussionPost::new);
 		courseEvents = checkSubDataBase(courseEvents, CourseEvent::new);

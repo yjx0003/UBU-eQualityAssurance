@@ -1,5 +1,6 @@
 package es.ubu.lsi.equalityassurance.controller.load;
 
+import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,10 +16,12 @@ import es.ubu.lsi.equalityassurance.model.CourseModule;
 import es.ubu.lsi.equalityassurance.model.DataBase;
 import es.ubu.lsi.equalityassurance.model.DescriptionFormat;
 import es.ubu.lsi.equalityassurance.model.DiscussionPost;
+import es.ubu.lsi.equalityassurance.model.Forum;
 import es.ubu.lsi.equalityassurance.model.ForumDiscussion;
 import es.ubu.lsi.equalityassurance.util.Constants;
 import es.ubu.lsi.moodlerestapi.webservice.api.mod.forum.ModForumGetForumDiscussionPosts;
 import es.ubu.lsi.moodlerestapi.webservice.api.mod.forum.ModForumGetForumDiscussions;
+import es.ubu.lsi.moodlerestapi.webservice.api.mod.forum.ModForumGetForumsByCourses;
 import es.ubu.lsi.moodlerestapi.webservice.util.UtilResponse;
 import es.ubu.lsi.moodlerestapi.webservice.webservices.WebService;
 
@@ -38,7 +41,29 @@ public class PopulateForum {
 		this.dataBase = dataBase;
 		this.webService = webService;
 	}
+	
 
+	public List<Forum> populateForum(int courseid){
+		
+		try {
+			List<Forum> forums = new ArrayList<>();
+			JSONArray jsonArray = UtilResponse.getJSONArrayResponse(webService, new ModForumGetForumsByCourses(courseid));
+			for(int i =  0; i < jsonArray.length(); i++) {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				Forum forum = dataBase.getForums().getById(jsonObject.getInt("id"));
+				forum.setCourseModule(dataBase.getModules().getById(jsonObject.getInt("cmid")));
+				forum.setName(jsonObject.getString("name"));
+				forum.setType(jsonObject.getString("type"));
+				forum.setIntro(jsonObject.getString("intro"));
+				forum.setForcesubscribe(jsonObject.getInt("forcesubscribe") == 1);
+			}
+			return forums;
+		} catch (IOException e) {
+			LOGGER.info("No se ha podido recargar los foros");
+			return Collections.emptyList();
+		}
+	}
+	
 	public List<ForumDiscussion> populateForumDiscussions(Collection<CourseModule> forums) {
 		List<ForumDiscussion> forumDiscussions = new ArrayList<>();
 		for (CourseModule forum : forums) {

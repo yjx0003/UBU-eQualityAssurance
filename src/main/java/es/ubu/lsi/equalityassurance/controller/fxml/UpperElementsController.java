@@ -31,7 +31,8 @@ public class UpperElementsController {
 	}
 
 	public void execute() {
-
+		Course actualCourse = mainController.getSelectionCourseController()
+				.getSelectedCourse();
 		Service<DataBase> service = new Service<DataBase>() {
 			@Override
 			protected Task<DataBase> createTask() {
@@ -45,8 +46,7 @@ public class UpperElementsController {
 		};
 		service.setOnSucceeded(v -> {
 			DataBase dataBase = service.getValue();
-			Course actualCourse = mainController.getSelectionCourseController()
-					.getSelectedCourse();
+			
 			Controller controller = Controller.getInstance();
 			Path courseDir = controller.getHostUserDir()
 					.resolve(UtilString.removeReservedChar(actualCourse.getFullName()) + " - " + actualCourse.getId());
@@ -80,9 +80,17 @@ public class UpperElementsController {
 		if (actualCourse == null) {
 			throw new IllegalArgumentException(I18n.get("warn.selectCourse"));
 		}
+		DataBase dataBase = populate(actualCourse);
+
+		return dataBase;
+
+	}
+
+	private DataBase populate(Course actualCourse) {
 		DataBase dataBase = new DataBase();
-		dataBase.setActualCourse(dataBase.getCourses()
-				.getById(actualCourse.getId()));
+		
+		dataBase.setActualCourse(actualCourse);
+		
 		Controller controller = Controller.getInstance();
 		WebService webService = controller.getWebService();
 
@@ -98,7 +106,7 @@ public class UpperElementsController {
 		populateCourseContent.populateCourseContent(actualCourse.getId());
 
 		PopulateForum populateForum = new PopulateForum(dataBase, webService);
-		
+		populateForum.populateForum(actualCourse.getId());
 		List<ForumDiscussion> forumDiscussions = populateForum.populateForumDiscussions(dataBase.getModules()
 				.getValues()
 				.stream()
@@ -108,8 +116,6 @@ public class UpperElementsController {
 		populateForum.populateDiscussionPosts(forumDiscussions.stream()
 				.map(ForumDiscussion::getId)
 				.collect(Collectors.toList()));
-
 		return dataBase;
-
 	}
 }

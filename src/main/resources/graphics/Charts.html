@@ -8,14 +8,32 @@
 
         var table;
 
+        var rowPopupFormatter = function (e, row, onRendered) {
+            var data = row.getData();
+            container = document.createElement("div");
+            if(!data.reasonFail){
+                throw "no reason fail";
+            }
+            contents = data.reasonFail;
+            if (data.reasonFailPopup) {
+                contents += "<br><br>";
+                for (const element of data.reasonFailPopup) {
+                    contents += "<li>" + element + "</li>";
+                }
+            }
+
+            container.innerHTML = contents;
+            return container;
+        }
+
         function updateTabulator(data, options) {
 
             options.columns = data.columns;
             options.data = data.tabledata;
-            if(table){
+            if (table) {
                 table.destroy();
             }
-          
+
             table = new Tabulator("#tabulatorDiv", options);
 
 

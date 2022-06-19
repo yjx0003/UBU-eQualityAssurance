@@ -21,6 +21,7 @@ public class SiteInfo implements Serializable{
 	private String lang;
 	private int userid;
 	private String siteurl;
+	private String release;
 	
 	private List<Course> coursesEnrolled;
 

@@ -28,6 +28,7 @@ public class PopulateSiteInfo {
 		siteInfo.setLang(jsonObject.getString("lang"));
 		siteInfo.setSiteurl(jsonObject.getString("siteurl"));
 		siteInfo.setUserid(jsonObject.getInt("userid"));
+		siteInfo.setRelease(jsonObject.getString("release"));
 		return siteInfo;
 		
 		
