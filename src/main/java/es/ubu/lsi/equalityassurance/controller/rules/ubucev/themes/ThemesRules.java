@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 import es.ubu.lsi.equalityassurance.controller.rules.CompositeRule;
 
-public class Themes extends CompositeRule {
-	public Themes() {
+public class ThemesRules extends CompositeRule {
+	public ThemesRules() {
 		leafRules = Arrays.asList(new TitleRule(), new SectionVisibleRule(), new DescriptionRule());
 	}
 }

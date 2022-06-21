@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 import es.ubu.lsi.equalityassurance.controller.rules.CompositeRule;
 
-public class ParticipantsGroups extends CompositeRule{
+public class ParticipantsGroupsRules extends CompositeRule{
 	
-	public  ParticipantsGroups() {
+	public  ParticipantsGroupsRules() {
 		leafRules =  Arrays.asList(new StudentRule(), new TeacherRule(), new HasRolesRule(), new HasGroupsRule(), new StudentGroupRule());
 	}
 	

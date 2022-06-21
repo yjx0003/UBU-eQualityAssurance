@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import es.ubu.lsi.equalityassurance.controller.rules.BasicRule;
-import es.ubu.lsi.equalityassurance.controller.rules.ubucev.zero_theme.ZeroTheme;
+import es.ubu.lsi.equalityassurance.controller.rules.ubucev.zero_theme.ZeroThemeRules;
 import es.ubu.lsi.equalityassurance.model.CourseModule;
 import es.ubu.lsi.equalityassurance.model.DataBase;
 import es.ubu.lsi.equalityassurance.model.ModuleType;
@@ -15,7 +15,7 @@ public class GeneralForumVisibleRule extends BasicRule {
 
 	@Override
 	public boolean apply(DataBase dataBase) {
-		Section sectionZero = ZeroTheme.getSectionZero(dataBase);
+		Section sectionZero = ZeroThemeRules.getSectionZero(dataBase);
 		if (sectionZero == null) {
 			return false;
 		}
@@ -34,7 +34,7 @@ public class GeneralForumVisibleRule extends BasicRule {
 
 	@Override
 	public List<Object> reasonFailPopup(DataBase dataBase) {
-		Section sectionZero = ZeroTheme.getSectionZero(dataBase);
+		Section sectionZero = ZeroThemeRules.getSectionZero(dataBase);
 		
 		if (sectionZero == null) {
 			return Collections.emptyList();

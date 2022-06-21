@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import es.ubu.lsi.equalityassurance.controller.Controller;
+import es.ubu.lsi.equalityassurance.controller.load.PopulateAssignment;
 import es.ubu.lsi.equalityassurance.controller.load.PopulateCourseBlocks;
 import es.ubu.lsi.equalityassurance.controller.load.PopulateCourseContent;
 import es.ubu.lsi.equalityassurance.controller.load.PopulateEnrolledUsersCourse;
 import es.ubu.lsi.equalityassurance.controller.load.PopulateForum;
+import es.ubu.lsi.equalityassurance.controller.load.PopulateQuiz;
 import es.ubu.lsi.equalityassurance.model.Course;
 import es.ubu.lsi.equalityassurance.model.DataBase;
 import es.ubu.lsi.equalityassurance.model.ForumDiscussion;
@@ -104,7 +106,10 @@ public class UpperElementsController {
 		populateCourseBlocks.populateCourseBlocks(actualCourse.getId());
 		PopulateCourseContent populateCourseContent = new PopulateCourseContent(webService, dataBase);
 		populateCourseContent.populateCourseContent(actualCourse.getId());
-
+		PopulateQuiz populateQuiz = new PopulateQuiz(dataBase, webService);
+		populateQuiz.populateQuiz(actualCourse.getId());
+		PopulateAssignment populateAssignment = new PopulateAssignment(dataBase, webService);
+		populateAssignment.populateAssignment(actualCourse.getId());
 		PopulateForum populateForum = new PopulateForum(dataBase, webService);
 		populateForum.populateForum(actualCourse.getId());
 		List<ForumDiscussion> forumDiscussions = populateForum.populateForumDiscussions(dataBase.getModules()

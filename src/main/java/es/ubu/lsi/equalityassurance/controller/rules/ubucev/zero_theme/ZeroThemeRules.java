@@ -8,9 +8,9 @@ import es.ubu.lsi.equalityassurance.controller.rules.ubucev.zero_theme.question_
 import es.ubu.lsi.equalityassurance.model.DataBase;
 import es.ubu.lsi.equalityassurance.model.Section;
 
-public class ZeroTheme extends CompositeRule {
+public class ZeroThemeRules extends CompositeRule {
 
-	public ZeroTheme() {
+	public ZeroThemeRules() {
 		leafRules = Arrays.asList(new NoticeTable(), new QuestionForum(), new CalendarCronogramRule(),
 				new ProgressTrackingRule(), new EvaluationRule(), new ScheduleRule(), new PlacementQuiz());
 	}

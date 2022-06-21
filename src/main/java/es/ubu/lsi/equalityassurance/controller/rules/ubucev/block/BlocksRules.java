@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 import es.ubu.lsi.equalityassurance.controller.rules.CompositeRule;
 
-public class BlocksRule extends CompositeRule {
+public class BlocksRules extends CompositeRule {
 
-	public BlocksRule() {
+	public BlocksRules() {
 		leafRules = Arrays.asList(new CalendarRule(), new UpcomingEventsRule(), new RepeatedBlockRule(), new SmowlRule());
 	}
 }

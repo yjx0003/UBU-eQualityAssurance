@@ -9,7 +9,7 @@ public class EvaluationRule extends BasicRule{
 
 	@Override
 	public boolean apply(DataBase dataBase) {
-		Section sectionZero = ZeroTheme.getSectionZero(dataBase);
+		Section sectionZero = ZeroThemeRules.getSectionZero(dataBase);
 		if (sectionZero == null) {
 			return false;
 		}

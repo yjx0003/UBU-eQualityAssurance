@@ -38,6 +38,8 @@ public class DataBase implements Serializable {
 	private SubDataBase<DiscussionPost> discussionPosts;
 	private SubDataBase<CourseEvent> courseEvents;
 	private SubDataBase<Block> blocks;
+	private SubDataBase<Quiz> quizzes;
+	private SubDataBase<Assignment> assignments;
 
 	private Course actualCourse;
 
@@ -61,6 +63,8 @@ public class DataBase implements Serializable {
 		discussionPosts = checkSubDataBase(discussionPosts, DiscussionPost::new);
 		courseEvents = checkSubDataBase(courseEvents, CourseEvent::new);
 		blocks = checkSubDataBase(blocks, Block::new);
+		quizzes = checkSubDataBase(quizzes, Quiz::new);
+		assignments = checkSubDataBase(assignments, Assignment::new);
 	}
 
 	public <E extends Serializable> SubDataBase<E> checkSubDataBase(SubDataBase<E> subDataBase,
