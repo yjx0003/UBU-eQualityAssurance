@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import es.ubu.lsi.equalityassurance.controller.rules.Rule;
+import es.ubu.lsi.equalityassurance.controller.rules.mooc.RootMoocRule;
 import es.ubu.lsi.equalityassurance.controller.rules.ubucev.RootUbucevRule;
 import es.ubu.lsi.equalityassurance.model.DataBase;
 import es.ubu.lsi.equalityassurance.view.Table;
@@ -26,6 +27,9 @@ public class WebViewContentController {
 	
 	@FXML
 	private Tab tabUbucev;
+	
+	@FXML
+	private Tab tabMooc;
 	
 	private JavaConnector javaConnector;
 	private Map<Tab, Rule> rootRules = new HashMap<>();
@@ -49,6 +53,7 @@ public class WebViewContentController {
 
 	private void initRules() {
 		rootRules.put(tabUbucev, new RootUbucevRule());
+		rootRules.put(tabMooc, new RootMoocRule());
 	}
 	
 	private void initWebView(WebView webView) {

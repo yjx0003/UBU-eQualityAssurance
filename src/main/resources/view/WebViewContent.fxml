@@ -12,5 +12,10 @@
             <WebView minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" />
          </content>
       </Tab>
+      <Tab fx:id="tabMooc" closable="false" text="%tab.mooc">
+         <content>
+            <WebView minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" />
+         </content>
+      </Tab>
    </tabs>
 </TabPane>

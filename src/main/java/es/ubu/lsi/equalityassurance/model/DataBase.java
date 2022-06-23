@@ -40,7 +40,8 @@ public class DataBase implements Serializable {
 	private SubDataBase<Block> blocks;
 	private SubDataBase<Quiz> quizzes;
 	private SubDataBase<Assignment> assignments;
-
+	private SubDataBase<Submission> submissions;
+	private SubDataBase<Resource> resources;
 	private Course actualCourse;
 
 	public DataBase() {
@@ -65,6 +66,8 @@ public class DataBase implements Serializable {
 		blocks = checkSubDataBase(blocks, Block::new);
 		quizzes = checkSubDataBase(quizzes, Quiz::new);
 		assignments = checkSubDataBase(assignments, Assignment::new);
+		submissions = checkSubDataBase(submissions, Submission::new);
+		resources = checkSubDataBase(resources, Resource::new);
 	}
 
 	public <E extends Serializable> SubDataBase<E> checkSubDataBase(SubDataBase<E> subDataBase,

@@ -5,7 +5,8 @@ import java.util.List;
 
 import es.ubu.lsi.equalityassurance.model.DataBase;
 import es.ubu.lsi.equalityassurance.util.I18n;
-
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 public abstract class BasicRule implements Rule{
 
 	@Override
@@ -15,10 +16,16 @@ public abstract class BasicRule implements Rule{
 	
 	@Override
 	public double getValue(DataBase dataBase) {
-		if(apply(dataBase)) {
-			return 1.0;
+		try {
+			if(apply(dataBase)) {
+				return 1.0;
+			}
+			return 0.0;
+		} catch(Exception e) {
+			log.debug("Error en apply", e);
+			return 0.0;
 		}
-		return 0.0;
+		
 	}
 	
 	@Override

@@ -40,7 +40,7 @@ public class GradeItem implements Serializable {
 	private Map<EnrolledUser, Double> percentages;
 	private double grademin;
 	private double grademax;
-
+	private int maxdepth;
 	private GradeItem father;
 	private List<GradeItem> children;
 

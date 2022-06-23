@@ -10,10 +10,11 @@
 
         var rowPopupFormatter = function (e, row, onRendered) {
             var data = row.getData();
-            container = document.createElement("div");
-            if(!data.reasonFail){
+            
+            if(!data.reasonFail || !data.reasonFailPopup){
                 throw "no reason fail";
             }
+            container = document.createElement("div");
             contents = data.reasonFail;
             if (data.reasonFailPopup) {
                 contents += "<br><br>";

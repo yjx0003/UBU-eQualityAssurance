@@ -261,14 +261,16 @@ public class PopulateGradeItem {
 		for (int i = 0; i < usergrades.length(); i++) {
 
 			JSONObject usergrade = usergrades.getJSONObject(i);
-
+			
 			EnrolledUser enrolledUser = dataBase.getUsers()
 					.getById(usergrade.getInt(Constants.USERID));
-
+			
 			JSONArray gradeitems = usergrade.getJSONArray(Constants.GRADEITEMS);
 			for (int j = 0; j < gradeitems.length(); j++) {
 				JSONObject gradeitem = gradeitems.getJSONObject(j);
 				GradeItem gradeItem = gradeItems.get(j);
+				
+				gradeItem.setMaxdepth(usergrade.getInt("maxdepth"));
 
 				gradeItem.addUserGrade(enrolledUser, gradeitem.optDouble(Constants.GRADERAW));
 				double grade = Double.NaN;

@@ -122,6 +122,11 @@ public enum WSFunctionEnum {
 	MOD_ASSIGN_GET_ASSIGNMENTS("mod_assign_get_assignments", 2.4),
 	
 	/**
+	 * Returns the submissions for assignments.
+	 */
+	MOD_ASSIGN_GET_SUBMISSIONS("mod_assign_get_submissions", 2.5),
+	
+	/**
 	 * Returns a list of forum posts for a discussion. 
 	 */
 	MOD_FORUM_GET_FORUM_DISCUSSION_POSTS("mod_forum_get_forum_discussion_posts", 2.7),
@@ -153,7 +158,12 @@ public enum WSFunctionEnum {
 	 * Return a list of attempts for the given quiz and user.
 	 */
 	MOD_QUIZ_GET_USER_ATTEMPTS("mod_quiz_get_user_attempts", 3.1),
-
+	
+	/**
+	 * Returns a list of files in a provided list of courses, if no list is provided all files that the user can view will be returned.
+	 */
+ 	MOD_RESOURCE_GET_RESOURCES_BY_COURSES("mod_resource_get_resources_by_courses",3.3),
+ 	
 	/**
 	 * Call multiple external functions and return all responses.
 	 */

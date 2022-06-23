@@ -30,6 +30,7 @@ public class Course implements Serializable {
 	private boolean reportAccess;
 	private boolean gradeItemAccess;
 	private boolean hasActivityCompletion;
+	private boolean showcompletionconditions;
 	
 	
 	public Course(int id) {
