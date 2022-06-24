@@ -22,7 +22,10 @@ public class AssignmentTimeRule extends BasicRule {
 		for (Assignment assignment : assignments) {
 			Instant allowSubmissions = assignment.getAllowsubmissionsfromdate();
 			Instant cutoffdate = assignment.getCutoffdate();
-			if (allowSubmissions.isBefore(start) || allowSubmissions.isAfter(end) || cutoffdate.isBefore(start) || cutoffdate.isAfter(end)) {
+			if (allowSubmissions.getEpochSecond() != 0L && allowSubmissions.isBefore(start)
+					|| allowSubmissions.isAfter(end)
+					|| allowSubmissions.getEpochSecond() != 0L && cutoffdate.isBefore(start)
+					|| cutoffdate.isAfter(end)) {
 				return false;
 			}
 		}
@@ -41,7 +44,9 @@ public class AssignmentTimeRule extends BasicRule {
 		for (Assignment assignment : assignments) {
 			Instant allowSubmissions = assignment.getAllowsubmissionsfromdate();
 			Instant cutoffdate = assignment.getCutoffdate();
-			if (allowSubmissions.isBefore(start) || allowSubmissions.isAfter(end) || cutoffdate.isBefore(start)
+			if (allowSubmissions.getEpochSecond() != 0L && allowSubmissions.isBefore(start)
+					|| allowSubmissions.isAfter(end)
+					|| allowSubmissions.getEpochSecond() != 0L && cutoffdate.isBefore(start)
 					|| cutoffdate.isAfter(end)) {
 				fails.add(assignment.getName());
 			}

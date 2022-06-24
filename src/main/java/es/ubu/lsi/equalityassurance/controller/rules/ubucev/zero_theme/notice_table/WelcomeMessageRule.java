@@ -30,7 +30,7 @@ public class WelcomeMessageRule extends BasicRule {
 						.equals(forum.getCourseModule()))
 				.collect(Collectors.toList());
 		Instant startDate = dataBase.getActualCourse()
-				.getStartDate();
+				.getStartDate().minus(7, ChronoUnit.DAYS);
 		Instant startDatePlus7Days = startDate.plus(7, ChronoUnit.DAYS);
 		for(ForumDiscussion forumDiscussion: discussions) {
 			Instant instant = forumDiscussion.getTimestart();

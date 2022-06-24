@@ -3,6 +3,7 @@ package es.ubu.lsi.equalityassurance.controller.rules.ubucev.other;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import es.ubu.lsi.equalityassurance.controller.rules.BasicRule;
 import es.ubu.lsi.equalityassurance.model.Assignment;
@@ -13,7 +14,12 @@ public class GradedAssignmentRule extends BasicRule {
 	@Override
 	public boolean apply(DataBase dataBase) {
 		Collection<Assignment> assignments = dataBase.getAssignments()
-				.getValues();
+				.getValues()
+				.stream()
+				.filter(a -> a.getCutoffdate()
+						.isAfter(dataBase.getActualCourse()
+								.getStartDate()))
+				.collect(Collectors.toList());
 		for (Assignment assignment : assignments) {
 			boolean value = dataBase.getSubmissions()
 					.getValues()
@@ -27,12 +33,17 @@ public class GradedAssignmentRule extends BasicRule {
 		return true;
 
 	}
-	
+
 	@Override
 	public List<Object> reasonFailPopup(DataBase dataBase) {
 		List<Object> list = new ArrayList<>();
 		Collection<Assignment> assignments = dataBase.getAssignments()
-				.getValues();
+				.getValues()
+				.stream()
+				.filter(a -> a.getCutoffdate()
+						.isAfter(dataBase.getActualCourse()
+								.getStartDate()))
+				.collect(Collectors.toList());
 		for (Assignment assignment : assignments) {
 			boolean value = dataBase.getSubmissions()
 					.getValues()

@@ -100,7 +100,7 @@ public class PopulateCourse {
 		course.setStartDate(Instant.ofEpochSecond(jsonObject.optLong(Constants.STARTDATE)));
 		course.setEndDate(Instant.ofEpochSecond(jsonObject.optLong(Constants.ENDDATE)));
 		course.setFavorite(jsonObject.optBoolean(Constants.ISFAVOURITE));
-		course.setShowcompletionconditions(jsonObject.getBoolean("showcompletionconditions"));
+		course.setShowcompletionconditions(jsonObject.optBoolean("showcompletionconditions"));
 
 		return course;
 

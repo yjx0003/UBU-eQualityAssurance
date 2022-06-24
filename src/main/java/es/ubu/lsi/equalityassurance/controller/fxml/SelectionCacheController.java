@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Collections;
 
 import es.ubu.lsi.equalityassurance.controller.Controller;
 import es.ubu.lsi.equalityassurance.model.DataBase;
@@ -80,7 +81,7 @@ public class SelectionCacheController {
 		File[] files = courseDir.listFiles();
 		if (files != null) {
 			ObservableList<File> observableListFiles = FXCollections.observableArrayList(files);
-
+			Collections.reverse(observableListFiles);
 			listViewCaches.setItems(observableListFiles);
 
 		} else {

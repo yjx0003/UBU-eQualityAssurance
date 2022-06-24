@@ -9,7 +9,6 @@ import es.ubu.lsi.equalityassurance.AppInfo;
 import es.ubu.lsi.equalityassurance.controller.Controller;
 import es.ubu.lsi.equalityassurance.controller.configuration.ConfigHelper;
 import es.ubu.lsi.equalityassurance.util.Style;
-import es.ubu.lsi.equalityassurance.util.UtilAlert;
 import es.ubu.lsi.equalityassurance.util.UtilFXML;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -35,7 +34,6 @@ public class Loader extends Application {
 		try {
 			Thread.currentThread().setUncaughtExceptionHandler((thread, throwable) -> {
 				LOGGER.error("Error no catcheado: {}", thread, throwable);
-	            UtilAlert.errorWindow("Uncaught exception: "+ throwable.getMessage(), throwable);
 	        });			
 			controller.initialize();
 			

@@ -27,6 +27,7 @@ import es.ubu.lsi.equalityassurance.util.UtilString;
 import es.ubu.lsi.moodlerestapi.webservice.webservices.WebService;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.scene.Cursor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -71,14 +72,16 @@ public class UpperElementsController {
 			Serialization.encrypt(controller.getPassword(), route, dataBase);
 			mainController.getSelectionCacheController()
 					.updateListView(courseDir.toFile());
+			Controller.getInstance().getStage().getScene().setCursor(Cursor.DEFAULT);
 		});
 		service.setOnFailed(v -> {
 			UtilAlert.warningWindow(v.getSource()
 					.getException()
 					.getMessage());
+			Controller.getInstance().getStage().getScene().setCursor(Cursor.DEFAULT);
 		});
 		service.start();
-
+		Controller.getInstance().getStage().getScene().setCursor(Cursor.WAIT);
 	}
 
 	private DataBase loadData() {

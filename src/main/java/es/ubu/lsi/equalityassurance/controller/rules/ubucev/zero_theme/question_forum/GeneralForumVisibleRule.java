@@ -19,7 +19,7 @@ public class GeneralForumVisibleRule extends BasicRule {
 		if (sectionZero == null) {
 			return false;
 		}
-		return dataBase.getModules()
+		List<CourseModule> forumModules = dataBase.getModules()
 				.getValues()
 				.stream()
 				.filter(cm -> cm.getSection()
@@ -28,8 +28,12 @@ public class GeneralForumVisibleRule extends BasicRule {
 				.filter(cm -> "general".equals(dataBase.getForums()
 						.getById(cm.getInstance())
 						.getType()))
-				.allMatch(CourseModule::isVisible);
-
+				.collect(Collectors.toList());
+		
+		if (forumModules.isEmpty()) {
+			return false;
+		}
+		return forumModules.stream().allMatch(CourseModule::isVisible);
 	}
 
 	@Override

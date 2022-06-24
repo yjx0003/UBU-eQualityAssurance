@@ -20,5 +20,12 @@ public class TeacherStartDiscussionRule extends BasicRule {
 				.anyMatch(r -> r.getRoleShortName()
 						.contains("teacher"));
 	}
+	
+	public static boolean hasStudentRole(EnrolledUser user) {
+		return user.getRoles()
+				.stream()
+				.anyMatch(r -> r.getRoleShortName()
+						.contains("student"));
+	}
 
 }

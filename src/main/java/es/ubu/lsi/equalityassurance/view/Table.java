@@ -74,7 +74,7 @@ public class Table {
 
 	private JSObject getOptions() {
 		JSObject jsObject = new JSObject();
-		jsObject.put("height", "'100%'");
+		
 		jsObject.put("dataTree", true);
 		jsObject.put("dataTreeStartExpanded", true);
 		jsObject.put("rowClickPopup", "rowPopupFormatter");
