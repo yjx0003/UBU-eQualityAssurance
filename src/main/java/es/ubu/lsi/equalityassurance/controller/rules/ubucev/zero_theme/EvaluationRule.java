@@ -2,7 +2,6 @@ package es.ubu.lsi.equalityassurance.controller.rules.ubucev.zero_theme;
 
 import es.ubu.lsi.equalityassurance.controller.rules.BasicRule;
 import es.ubu.lsi.equalityassurance.model.DataBase;
-import es.ubu.lsi.equalityassurance.model.ModuleType;
 import es.ubu.lsi.equalityassurance.model.Section;
 
 public class EvaluationRule extends BasicRule{
@@ -19,7 +18,6 @@ public class EvaluationRule extends BasicRule{
 				.stream()
 				.filter(cm -> cm.getSection()
 						.equals(sectionZero))
-				.filter(cm -> cm.getModuleType() == ModuleType.URL)
 				.anyMatch(cm-> cm.getModuleName().contains("normativa") && cm.getModuleName().contains("evaluación"));
 		
 		
