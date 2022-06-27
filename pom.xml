@@ -152,7 +152,7 @@
 						<manifest>
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-							<mainClass>es.ubu.lsi.ubumonitor.UBUMonitor</mainClass>
+							<mainClass>es.ubu.lsi.equalityassurance.UBUeQualityAssurance</mainClass>
 						</manifest>
 					</archive>
 
