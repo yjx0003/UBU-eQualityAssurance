@@ -12,7 +12,7 @@ public class ZeroThemeRules extends CompositeRule {
 
 	public ZeroThemeRules() {
 		leafRules = Arrays.asList(new NoticeTable(), new QuestionForum(), new CalendarCronogramRule(),
-				new ProgressTrackingRule(), new EvaluationRule(), new ScheduleRule(), new PlacementQuiz());
+				new EnableCompletionRule(), new EvaluationRule(), new ScheduleRule(), new PlacementQuiz());
 	}
 
 	public static Section getSectionZero(DataBase dataBase) {
