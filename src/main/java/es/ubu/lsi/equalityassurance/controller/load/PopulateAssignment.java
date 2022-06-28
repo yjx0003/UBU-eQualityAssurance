@@ -1,6 +1,5 @@
 package es.ubu.lsi.equalityassurance.controller.load;
 
-import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,7 +34,7 @@ public class PopulateAssignment {
 			JSONObject jsonObject = UtilResponse.getJSONObjectResponse(webService, modAssignGetAssigments);
 			return populateAssignment(jsonObject);
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			return Collections.emptyList();
 		}
 	}
@@ -48,24 +47,24 @@ public class PopulateAssignment {
 		for (int i = 0; i < assignmentsArray.length(); i++) {
 			JSONObject assign = assignmentsArray.getJSONObject(i);
 			Assignment assignment = dataBase.getAssignments()
-					.getById(assign.getInt("id"));
+					.getById(assign.optInt("id"));
 			assignments.add(assignment);
 			assignment.setCourseModule(dataBase.getModules()
-					.getById(assign.getInt("cmid")));
-			assignment.setName(assign.getString("name"));
-			assignment.setNosubmissions(assign.getInt("nosubmissions"));
-			assignment.setSubmissiondrafts(assign.getInt("submissiondrafts"));
-			assignment.setSendnotifications(assign.getInt("sendnotifications") == 1);
-			assignment.setSendlatenotifications(assign.getInt("sendlatenotifications") == 1);
-			assignment.setSendstudentnotifications(assign.getInt("sendstudentnotifications") == 1);
-			assignment.setDuedate(Instant.ofEpochSecond(assign.getLong("duedate")));
-			assignment.setAllowsubmissionsfromdate(Instant.ofEpochSecond(assign.getLong("allowsubmissionsfromdate")));
+					.getById(assign.optInt("cmid")));
+			assignment.setName(assign.optString("name"));
+			assignment.setNosubmissions(assign.optInt("nosubmissions"));
+			assignment.setSubmissiondrafts(assign.optInt("submissiondrafts"));
+			assignment.setSendnotifications(assign.optInt("sendnotifications") == 1);
+			assignment.setSendlatenotifications(assign.optInt("sendlatenotifications") == 1);
+			assignment.setSendstudentnotifications(assign.optInt("sendstudentnotifications") == 1);
+			assignment.setDuedate(Instant.ofEpochSecond(assign.optLong("duedate")));
+			assignment.setAllowsubmissionsfromdate(Instant.ofEpochSecond(assign.optLong("allowsubmissionsfromdate")));
 			assignment.setGrade(assign.getDouble("grade"));
-			assignment.setTimemodified(Instant.ofEpochSecond(assign.getLong("timemodified")));
-			assignment.setCompletionsubmit(assign.getInt("completionsubmit") == 1);
-			assignment.setCutoffdate(Instant.ofEpochSecond(assign.getLong("cutoffdate")));
-			assignment.setGradingduedate(Instant.ofEpochSecond(assign.getLong("gradingduedate")));
-			assignment.setTeamsubmission(assign.getInt("teamsubmission") == 1);
+			assignment.setTimemodified(Instant.ofEpochSecond(assign.optLong("timemodified")));
+			assignment.setCompletionsubmit(assign.optInt("completionsubmit") == 1);
+			assignment.setCutoffdate(Instant.ofEpochSecond(assign.optLong("cutoffdate")));
+			assignment.setGradingduedate(Instant.ofEpochSecond(assign.optLong("gradingduedate")));
+			assignment.setTeamsubmission(assign.optInt("teamsubmission") == 1);
 
 		}
 
@@ -79,7 +78,7 @@ public class PopulateAssignment {
 			JSONObject jsonObject = UtilResponse.getJSONObjectResponse(webService, modAssignGetSubmissions);
 			return populateSubmission(jsonObject);
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			return Collections.emptyList();
 		}
 	}
@@ -89,19 +88,19 @@ public class PopulateAssignment {
 		JSONArray assignments = jsonObject.getJSONArray("assignments");
 		for(int i = 0; i< assignments.length(); i++) {
 			JSONObject assignmentObject = assignments.getJSONObject(i);
-			Assignment assignment = dataBase.getAssignments().getById(assignmentObject.getInt("assignmentid"));
+			Assignment assignment = dataBase.getAssignments().getById(assignmentObject.optInt("assignmentid"));
 			JSONArray submissions = assignmentObject.getJSONArray("submissions");
 			for(int j = 0; j<submissions.length(); ++j) {
 				JSONObject submissionJSON =  submissions.getJSONObject(j);
-				Submission submission = dataBase.getSubmissions().getById(submissionJSON.getInt("id"));
+				Submission submission = dataBase.getSubmissions().getById(submissionJSON.optInt("id"));
 				list.add(submission);
 				submission.setAssignment(assignment);
-				submission.setUser(dataBase.getUsers().getById(submissionJSON.getInt("userid")));
-				submission.setTimecreated(Instant.ofEpochSecond(submissionJSON.getLong("timecreated")));
-				submission.setTimemodified(Instant.ofEpochSecond(submissionJSON.getLong("timemodified")));
-				submission.setStatus(submissionJSON.getString("status"));
-				submission.setGroupid(submissionJSON.getInt("groupid"));
-				submission.setGradingstatus(submissionJSON.getString("gradingstatus"));
+				submission.setUser(dataBase.getUsers().getById(submissionJSON.optInt("userid")));
+				submission.setTimecreated(Instant.ofEpochSecond(submissionJSON.optLong("timecreated")));
+				submission.setTimemodified(Instant.ofEpochSecond(submissionJSON.optLong("timemodified")));
+				submission.setStatus(submissionJSON.optString("status"));
+				submission.setGroupid(submissionJSON.optInt("groupid"));
+				submission.setGradingstatus(submissionJSON.optString("gradingstatus"));
 			
 			}
 		}
