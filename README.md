@@ -1,6 +1,7 @@
 # UBU-eQualityAssurance
+<p align="center"><img height="300" src="src/main/resources/img/logo_min.png" />
 
-## Resumen
+ ## Resumen
 
 Entre el auge de las tecnologías del ámbito educativo y las restricciones sociales contra la COVID-19, se ha producido un cambio
 masivo hacia un proceso de enseñanza y aprendizaje en línea enfocado a plataformas online como puede ser Moodle o BlackBoard.
