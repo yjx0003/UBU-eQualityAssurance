@@ -1,5 +1,5 @@
 # UBU-eQualityAssurance
-<p align="center"><img height="300" src="src/main/resources/img/logo_min.png" />
+<p align="center"><img height="200" src="src/main/resources/img/logo_min.png" />
 
  ## Resumen
 
