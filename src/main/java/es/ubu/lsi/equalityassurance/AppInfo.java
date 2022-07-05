@@ -9,7 +9,7 @@ package es.ubu.lsi.equalityassurance;
 public class AppInfo {
 
 
-	public static final String VERSION = "0.1";
+	public static final String VERSION = "1.0";
 	
 	public static final String APPLICATION_VERSION = "v" + VERSION;
 
